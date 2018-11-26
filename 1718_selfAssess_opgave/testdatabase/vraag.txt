@@ -1,0 +1,2 @@
+Welk patroon definieert een familie van algoritmes. Kapselt ze in en maakt ze verwisselbaar?,Design patterns
+Welk ontwerp principe is het minst van toepassing op het Strategy patroon?,Design principles
