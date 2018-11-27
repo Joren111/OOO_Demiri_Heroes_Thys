@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 
@@ -24,12 +25,19 @@ public class TestPane extends GridPane {
         this.setVgap(5);
         this.setHgap(5);
 
-		questionField = new Label();
+		questionField = new Label("vraag");
 		add(questionField, 0, 0, 1, 1);
 		
 		statementGroup = new ToggleGroup();
+		RadioButton rb1 = new RadioButton("antwoord 1");
+		rb1.setToggleGroup(statementGroup);
+		add(rb1, 0, 1, 1, 1);
+		RadioButton rb2 = new RadioButton("antwoord 2");
+		rb2.setToggleGroup(statementGroup);
+		add(rb2, 0, 2, 1, 1);
 
 		submitButton = new Button("Submit");
+		add(submitButton, 0, 10, 1, 1);
 	}
 	
 	public void setProcessAnswerAction(EventHandler<ActionEvent> processAnswerAction) {
