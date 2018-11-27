@@ -26,11 +26,10 @@ public class BadDb {
         if (categoryList == null) {
             List<Category> list = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader("testdatabase\\groep.txt"));
-            String s = "";
+            String s;
             while ((s = br.readLine()) != null) {
                 Category category = new Category();
-                String data[] = new String[2];
-                data = s.split(",");
+                String data[] = s.split(",");
                 category.setTitle(data[0]);
                 category.setDescription(data[1]);
                 list.add(category);
@@ -46,11 +45,10 @@ public class BadDb {
         if (questionList == null) {
             List<Question> list = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader("testdatabase\\vraag.txt"));
-            String s = "";
+            String s;
             while ((s = br.readLine()) != null) {
                 Question question = new Question();
-                String data[] = new String[2];
-                data = s.split(",");
+                String data[] = s.split(",");
                 question.setQuestion(data[0]);
                 question.setCategory(data[1]);
                 list.add(question);
