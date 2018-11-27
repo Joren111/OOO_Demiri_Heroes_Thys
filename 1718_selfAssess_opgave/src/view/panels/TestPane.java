@@ -3,6 +3,9 @@ package view.panels;
 import java.util.ArrayList;
 import java.util.List;
 
+import domain.Question;
+import domain.db.BadDb;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -16,6 +19,7 @@ public class TestPane extends GridPane {
 	private Label questionField;
 	private Button submitButton;
 	private ToggleGroup statementGroup;
+	private BadDb questions = new BadDb();
 	
 	public TestPane (){
 		this.setPrefHeight(300);
@@ -24,17 +28,17 @@ public class TestPane extends GridPane {
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
-
+        
 		questionField = new Label("vraag");
 		add(questionField, 0, 0, 1, 1);
 		
 		statementGroup = new ToggleGroup();
-		RadioButton rb1 = new RadioButton("antwoord 1");
-		rb1.setToggleGroup(statementGroup);
-		add(rb1, 0, 1, 1, 1);
-		RadioButton rb2 = new RadioButton("antwoord 2");
-		rb2.setToggleGroup(statementGroup);
-		add(rb2, 0, 2, 1, 1);
+		//dit hoort antwoorden te zijn, maar questions is voor nu een placeholder....
+		for(int i = 0; i < questions.getQuestionList().size(); i++){
+			RadioButton rb1 = new RadioButton(questions.getQuestionList().get(i).getQuestion());
+			rb1.setToggleGroup(statementGroup);
+			add(rb1, 0, i+1, 1, 1);
+		}
 
 		submitButton = new Button("Submit");
 		add(submitButton, 0, 10, 1, 1);
