@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -13,6 +14,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -43,7 +46,16 @@ public class CategoryOverviewPane extends GridPane {
         this.add(table, 0, 1, 2, 6);
 
         btnNew = new Button("New");
+        setNewAction(this::handleButtonAction);
         this.add(btnNew, 0, 11, 1, 1);
+    }
+
+    private void handleButtonAction(ActionEvent event) {
+        GridPane secondaryLayout = new CategoryDetailPane();
+        Scene newCategoryScene = new Scene(secondaryLayout, 310, 155);
+        Stage newCategoryWindow = new Stage();
+        newCategoryWindow.setScene(newCategoryScene);
+        newCategoryWindow.show();
     }
 
     private List<Category> dataList() throws Exception {
