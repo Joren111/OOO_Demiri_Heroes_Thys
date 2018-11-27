@@ -5,6 +5,7 @@ import javafx.beans.property.StringProperty;
 
 public class Category {
 	private StringProperty title, description;
+	private Category subCategory;
 	
 	public void setTitle(String x){
 		titleProperty().set(x);
@@ -30,6 +31,14 @@ public class Category {
 	public StringProperty descriptionProperty(){
 		if(description == null) description = new SimpleStringProperty(this, "Description");
 		return description;
+	}
+
+	public Category getSubCategory(Category category) {
+		return category;
+	}
+
+	public void setSubCategory(Category category) {
+		subCategory = category;
 	}
 
 	@Override
