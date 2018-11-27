@@ -8,7 +8,6 @@ public class Category {
 	
 	public void setTitle(String x){
 		titleProperty().set(x);
-		
 	}
 
 	public String getTitle(){
@@ -33,4 +32,8 @@ public class Category {
 		return description;
 	}
 
+	@Override
+	public String toString()  {
+		return getTitle();
+	}
 }

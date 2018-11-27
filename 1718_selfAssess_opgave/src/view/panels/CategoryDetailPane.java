@@ -1,12 +1,13 @@
 package view.panels;
 
+import domain.Category;
+import domain.db.BadDb;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -15,7 +16,7 @@ public class CategoryDetailPane extends GridPane {
 	private TextField titleField, descriptionField;
 	private ComboBox categoryField;
 
-	public CategoryDetailPane() {
+	public CategoryDetailPane() throws Exception {
 		this.setPrefHeight(150);
 		this.setPrefWidth(300);
 		
@@ -33,7 +34,8 @@ public class CategoryDetailPane extends GridPane {
 
 		this.add(new Label("Main Category:"), 0, 2, 1, 1);
 		categoryField = new ComboBox<>();
-
+		categoryField.setItems(BadDb.getInstance().getCategoryList());
+		categoryField.getSelectionModel().select(0);
 		this.add(categoryField, 1, 2, 1, 1);
 
 		btnCancel = new Button("Cancel");

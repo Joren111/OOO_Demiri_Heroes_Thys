@@ -1,6 +1,7 @@
 package view.panels;
 
 import domain.Category;
+import domain.db.BadDb;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,7 +25,6 @@ import java.util.List;
 public class CategoryOverviewPane extends GridPane {
     private TableView<Category> table;
     private Button btnNew;
-    private ObservableList<Category> categories;
 
     public CategoryOverviewPane() throws Exception {
         this.setPadding(new Insets(5, 5, 5, 5));
@@ -35,8 +35,7 @@ public class CategoryOverviewPane extends GridPane {
 
         table = new TableView<Category>();
         table.setPrefWidth(REMAINING);
-        categories = (ObservableList<Category>) dataList();
-        table.setItems(categories);
+        table.setItems(BadDb.getInstance().getCategoryList());
         TableColumn nameCol = new TableColumn<>("Name");
         nameCol.setCellValueFactory(new PropertyValueFactory("title"));
         table.getColumns().add(nameCol);
@@ -51,26 +50,16 @@ public class CategoryOverviewPane extends GridPane {
     }
 
     private void handleButtonAction(ActionEvent event) {
-        GridPane secondaryLayout = new CategoryDetailPane();
+        GridPane secondaryLayout = null;
+        try {
+            secondaryLayout = new CategoryDetailPane();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Scene newCategoryScene = new Scene(secondaryLayout, 310, 155);
         Stage newCategoryWindow = new Stage();
         newCategoryWindow.setScene(newCategoryScene);
         newCategoryWindow.show();
-    }
-
-    private List<Category> dataList() throws Exception {
-        List<Category> list = FXCollections.observableArrayList();
-        BufferedReader br = new BufferedReader(new FileReader("testdatabase\\groep.txt"));
-        String s = "";
-        while ((s = br.readLine()) != null) {
-            Category category = new Category();
-            String data[] = new String[2];
-            data = s.split(",");
-            category.setTitle(data[0]);
-            category.setDescription(data[1]);
-            list.add(category);
-        }
-        return list;
     }
 
     public void setNewAction(EventHandler<ActionEvent> newAction) {
