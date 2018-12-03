@@ -62,9 +62,17 @@ public class BadDb {
                 String s;
                 while ((s = br.readLine()) != null) {
                     Question question = new Question();
+                    List<String> answers = new ArrayList<>();
+                    ObservableList<String> answersList;
                     String data[] = s.split(",");
                     question.setQuestion(data[0]);
                     question.setCategory(data[1]);
+                    question.setCorrectAnswer(data[2]);
+                    for(int i=3; i < data.length; i++){
+                    	answers.add(data[i]);
+                    }
+                    answersList = FXCollections.observableArrayList(answers);
+                    question.setAnswers(answersList);
                     list.add(question);
                 }
 
