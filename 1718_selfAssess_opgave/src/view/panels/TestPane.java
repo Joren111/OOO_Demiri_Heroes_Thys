@@ -25,8 +25,7 @@ public class TestPane extends GridPane {
 	private int x;
 	private ObservableList<Question> questions;
 	
-	public TestPane (ObservableList<Question> questions, int x){
-		this.questions = questions;
+	public TestPane (int x){
 		this.setPrefHeight(300);
 		this.setPrefWidth(750);
 		
@@ -35,9 +34,10 @@ public class TestPane extends GridPane {
         this.setHgap(5);
         
         int a = 1;
-        ObservableList<String> answers = questions.get(x).getAnswers();
+        this.questions = BadDb.getInstance().getQuestionList();
+        ObservableList<String> answers = this.questions.get(x).getAnswers();
         
-		questionField = new Label(questions.get(x).getQuestion());
+		questionField = new Label(this.questions.get(x).getQuestion());
 		add(questionField, 0, 0, 1, 1);
 		
 		statementGroup = new ToggleGroup();
@@ -57,7 +57,7 @@ public class TestPane extends GridPane {
 
 	private void handleSubmitAction(ActionEvent event){
 		if(this.x < this.questions.size()){
-			TestPane testPane = new TestPane(this.questions, this.x);
+			TestPane testPane = new TestPane(this.x);
 	        Scene newTestScene = new Scene(testPane, 750, 300);
 	        Stage newTestWindow = new Stage();
 	        newTestWindow.setScene(newTestScene);

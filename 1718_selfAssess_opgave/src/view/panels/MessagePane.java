@@ -1,10 +1,5 @@
 package view.panels;
 
-import java.util.Observer;
-
-import domain.Question;
-import domain.db.BadDb;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -34,12 +29,9 @@ public class MessagePane extends GridPane {
 		testButton = new Button("Evaluate");
 		testButton.setOnAction(new EventHandler<ActionEvent>() { //TODO remove or generalize
 
-			private ObservableList<Question> questionList;
-
 			@Override
 			public void handle(ActionEvent event) {
-				this.questionList = BadDb.getInstance().getQuestionList();
-				TestPane testPane = new TestPane(questionList, 0);
+				TestPane testPane = new TestPane(0);
 		        Scene newTestScene = new Scene(testPane, 750, 300);
 		        Stage newTestWindow = new Stage();
 		        newTestWindow.setScene(newTestScene);
