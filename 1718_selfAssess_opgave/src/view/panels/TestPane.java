@@ -35,14 +35,15 @@ public class TestPane extends GridPane {
         this.setHgap(5);
         
         int a = 1;
+        ObservableList<String> answers = questions.get(x).getAnswers();
         
 		questionField = new Label(questions.get(x).getQuestion());
 		add(questionField, 0, 0, 1, 1);
 		
 		statementGroup = new ToggleGroup();
-		//dit hoort antwoorden te zijn, maar questions is voor nu een placeholder....
-		for(int i = 0; i < questions.get(x).getAnswers().size(); i++){
-			RadioButton rb1 = new RadioButton(questions.get(x).getAnswers().get(i));
+		FXCollections.shuffle(answers);
+		for(int i = 0; i < answers.size(); i++){
+			RadioButton rb1 = new RadioButton(answers.get(i));
 			rb1.setToggleGroup(statementGroup);
 			add(rb1, 0, i+1, 1, 1);
 			a++;
@@ -53,17 +54,14 @@ public class TestPane extends GridPane {
 		setProcessAnswerAction(this::handleSubmitAction);
 		add(submitButton, 0, a+1, 1, 1);
 	}
-	
+
 	private void handleSubmitAction(ActionEvent event){
-		if(this.x > this.questions.size()){
-			
-		}
-		else{
+		if(this.x < this.questions.size()){
 			TestPane testPane = new TestPane(this.questions, this.x);
 	        Scene newTestScene = new Scene(testPane, 750, 300);
 	        Stage newTestWindow = new Stage();
 	        newTestWindow.setScene(newTestScene);
-	        newTestWindow.show();
+	        newTestWindow.show();	
 		}
 	}
 	
