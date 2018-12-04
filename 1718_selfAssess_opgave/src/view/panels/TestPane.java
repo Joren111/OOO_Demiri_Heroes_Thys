@@ -16,6 +16,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
@@ -67,11 +68,13 @@ public class TestPane extends GridPane {
 	private void handleSubmitAction(ActionEvent event){
 		String answer = null;
 		if(statementGroup.getSelectedToggle()!=null){
-			answer = statementGroup.getSelectedToggle().getUserData().toString();
+			answer = ((RadioButton) statementGroup.getSelectedToggle()).getText();
 			this.selectedAnswers.add(answer);
 		}else{
 			this.selectedAnswers.add("0");
 		}
+		Stage stage = (Stage) submitButton.getScene().getWindow();
+        stage.close();
 		if(this.x < this.questions.size()){
 			TestPane testPane = new TestPane(this.x, this.selectedAnswers);
 	        Scene newTestScene = new Scene(testPane, 750, 300);
@@ -79,6 +82,7 @@ public class TestPane extends GridPane {
 	        newTestWindow.setScene(newTestScene);
 	        newTestWindow.show();	
 		}
+		
 	}
 	
 	public void setProcessAnswerAction(EventHandler<ActionEvent> processAnswerAction) {
