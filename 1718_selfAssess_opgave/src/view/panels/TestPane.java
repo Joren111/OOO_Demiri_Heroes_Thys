@@ -1,10 +1,13 @@
 package view.panels;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import domain.Question;
 import domain.db.BadDb;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
@@ -24,8 +28,12 @@ public class TestPane extends GridPane {
 	private ToggleGroup statementGroup;
 	private int x;
 	private ObservableList<Question> questions;
+	private List<String> selectedAnswers;
+	public TestPane(){
+		this(0, new ArrayList<String>());
+	}
 	
-	public TestPane (int x){
+	public TestPane (int x, List<String> selectedAnswers){
 		this.setPrefHeight(300);
 		this.setPrefWidth(750);
 		
@@ -35,6 +43,7 @@ public class TestPane extends GridPane {
         
         int a = 1;
         this.questions = BadDb.getInstance().getQuestionList();
+        this.selectedAnswers = selectedAnswers;
         ObservableList<String> answers = this.questions.get(x).getAnswers();
         
 		questionField = new Label(this.questions.get(x).getQuestion());
@@ -56,8 +65,15 @@ public class TestPane extends GridPane {
 	}
 
 	private void handleSubmitAction(ActionEvent event){
+		String answer = null;
+		if(statementGroup.getSelectedToggle()!=null){
+			answer = statementGroup.getSelectedToggle().getUserData().toString();
+			this.selectedAnswers.add(answer);
+		}else{
+			this.selectedAnswers.add("0");
+		}
 		if(this.x < this.questions.size()){
-			TestPane testPane = new TestPane(this.x);
+			TestPane testPane = new TestPane(this.x, this.selectedAnswers);
 	        Scene newTestScene = new Scene(testPane, 750, 300);
 	        Stage newTestWindow = new Stage();
 	        newTestWindow.setScene(newTestScene);

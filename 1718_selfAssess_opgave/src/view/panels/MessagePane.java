@@ -1,5 +1,7 @@
 package view.panels;
 
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -31,7 +33,7 @@ public class MessagePane extends GridPane {
 
 			@Override
 			public void handle(ActionEvent event) {
-				TestPane testPane = new TestPane(0);
+				TestPane testPane = new TestPane();
 		        Scene newTestScene = new Scene(testPane, 750, 300);
 		        Stage newTestWindow = new Stage();
 		        newTestWindow.setScene(newTestScene);
