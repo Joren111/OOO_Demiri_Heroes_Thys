@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.Question;
+import domain.controller.TestController;
 import domain.db.BadDb;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -28,13 +29,11 @@ public class TestPane extends GridPane {
 	private Button submitButton;
 	private ToggleGroup statementGroup;
 	private int x;
-	private ObservableList<Question> questions;
-	private List<String> selectedAnswers;
-	public TestPane(){
-		this(0, new ArrayList<String>());
-	}
+	private Question question;
+	private ArrayList<String> selectedAnswers;
+	private TestController test;
 	
-	public TestPane (int x, List<String> selectedAnswers){
+	public TestPane (int x, Question question){
 		this.setPrefHeight(300);
 		this.setPrefWidth(750);
 		
@@ -43,11 +42,11 @@ public class TestPane extends GridPane {
         this.setHgap(5);
         
         int a = 1;
-        this.questions = BadDb.getInstance().getQuestionList();
+        this.question = question;
         this.selectedAnswers = selectedAnswers;
-        ObservableList<String> answers = this.questions.get(x).getAnswers();
+        ObservableList<String> answers = this.question.getAnswers();
         
-		questionField = new Label(this.questions.get(x).getQuestion());
+		questionField = new Label(this.question.getQuestion());
 		add(questionField, 0, 0, 1, 1);
 		
 		statementGroup = new ToggleGroup();
@@ -73,16 +72,10 @@ public class TestPane extends GridPane {
 		}else{
 			this.selectedAnswers.add("0");
 		}
-		Stage stage = (Stage) submitButton.getScene().getWindow();
-        stage.close();
-		if(this.x < this.questions.size()){
-			TestPane testPane = new TestPane(this.x, this.selectedAnswers);
-	        Scene newTestScene = new Scene(testPane, 750, 300);
-	        Stage newTestWindow = new Stage();
-	        newTestWindow.setScene(newTestScene);
-	        newTestWindow.show();	
-		}
-		
+		Stage stage = (Stage) submitButton.getScene().
+	}
+	public List<String> getAsnwers(){
+		return this.selectedAnswers;
 	}
 	
 	public void setProcessAnswerAction(EventHandler<ActionEvent> processAnswerAction) {
