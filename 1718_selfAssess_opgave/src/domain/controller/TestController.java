@@ -6,26 +6,45 @@ import java.util.List;
 import domain.Question;
 import domain.db.BadDb;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import view.panels.MessagePane;
 import view.panels.TestPane;
 
 public class TestController {
+	private MessagePane messagePane;
+	private TestPane testPane;
 	private List<String> selectedAnswers;
 	private List<Question> questions;
+	private Stage newTestWindow;
+	private int count;
 	
-	public TestController(){
+	public TestController(MessagePane messagePane){
 		this.questions = BadDb.getInstance().getQuestionList();
 		this.selectedAnswers = new ArrayList<String>();
+		this.messagePane = messagePane;
+	}
+	
+	public void handleTestAction() {
+		this.count = 0;
+		doTest(count);
+	}
+	
+	public void handleSubmitAction() {
+		this.selectedAnswers.add(this.testPane.getAsnwer());
+		this.newTestWindow.close();
+		count++;
+		doTest(count);
 	}
 	
 	public void doTest(int x){
-		TestPane testPane = new TestPane(x, this.questions.get(x));
+		this.testPane = new TestPane(x, this.questions.get(x), this);
 		Scene newTestScene = new Scene(testPane, 750, 300);
-		Stage newTestWindow = new Stage();
-		newTestWindow.setScene(newTestScene);
-		newTestWindow.show();
-		selectedAnswers.add(testPane.getAnswer());
+		this.newTestWindow = new Stage();
+		this.newTestWindow.setScene(newTestScene);
+		this.newTestWindow.show();
 	}
 	
 	public void addSelectedAnswer(String answer){

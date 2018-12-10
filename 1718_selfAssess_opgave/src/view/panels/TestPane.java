@@ -30,10 +30,9 @@ public class TestPane extends GridPane {
 	private ToggleGroup statementGroup;
 	private int x;
 	private Question question;
-	private ArrayList<String> selectedAnswers;
-	private TestController test;
+	private TestController testController;
 	
-	public TestPane (int x, Question question){
+	public TestPane (int x, Question question, TestController testController){
 		this.setPrefHeight(300);
 		this.setPrefWidth(750);
 		
@@ -43,8 +42,8 @@ public class TestPane extends GridPane {
         
         int a = 1;
         this.question = question;
-        this.selectedAnswers = selectedAnswers;
         ObservableList<String> answers = this.question.getAnswers();
+        this.testController = testController;
         
 		questionField = new Label(this.question.getQuestion());
 		add(questionField, 0, 0, 1, 1);
@@ -60,26 +59,22 @@ public class TestPane extends GridPane {
 		x++;
 		this.x = x;
 		submitButton = new Button("Submit");
-		setProcessAnswerAction(this::handleSubmitAction);
+		submitButton.setOnAction(this::handleSubmitAction);
 		add(submitButton, 0, a+1, 1, 1);
 	}
-
+	
 	private void handleSubmitAction(ActionEvent event){
+		this.testController.handleSubmitAction();
+	}
+
+	public String getAsnwer(){
 		String answer = null;
 		if(statementGroup.getSelectedToggle()!=null){
 			answer = ((RadioButton) statementGroup.getSelectedToggle()).getText();
-			this.selectedAnswers.add(answer);
 		}else{
-			this.selectedAnswers.add("0");
+			answer = "0";
 		}
-		Stage stage = (Stage) submitButton.getScene().
-	}
-	public List<String> getAsnwers(){
-		return this.selectedAnswers;
-	}
-	
-	public void setProcessAnswerAction(EventHandler<ActionEvent> processAnswerAction) {
-		submitButton.setOnAction(processAnswerAction);
+		return answer;
 	}
 
 	public List<String> getSelectedStatements() {

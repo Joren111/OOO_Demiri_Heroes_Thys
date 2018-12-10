@@ -1,5 +1,6 @@
 package application;
 
+import domain.controller.TestController;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -25,6 +26,8 @@ public class Main extends Application {
 			CategoryDetailPane categoryDetailPanel = new CategoryDetailPane();
 
 			MessagePane messagePane = new MessagePane();
+			TestController testController = new TestController(messagePane);
+			messagePane.addTestController(testController);
 
 			Group root = new Group();
 			Scene scene = new Scene(root, 750, 400);

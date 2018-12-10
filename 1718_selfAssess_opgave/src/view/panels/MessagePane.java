@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 public class MessagePane extends GridPane {
 	private Label scoreField;
 	private Button testButton;
-	private TestController test = new TestController();
+	private TestController testController;
 	
 	public MessagePane (){
 	    setBorder(new Border(new BorderStroke(Color.BLACK, 
@@ -38,18 +38,16 @@ public class MessagePane extends GridPane {
         add(scoreField, 0,1,1,1);
         
 		testButton = new Button("Evaluate");
-		testButton.setOnAction(new EventHandler<ActionEvent>() { //TODO remove or generalize
-
-			@Override
-			public void handle(ActionEvent event) {
-				test.doTest(0);
-			}
-		});
+		testButton.setOnAction(this::handleTestAction);
 		add(testButton, 0,2,1,1);
 		setHalignment(testButton, HPos.CENTER);
 	}
 	
-	public TestController getTest(){
-		return test;
+	public void handleTestAction(ActionEvent event){
+		this.testController.handleTestAction();
+	}
+	
+	public void addTestController(TestController testController){
+		this.testController = testController;
 	}
 }
