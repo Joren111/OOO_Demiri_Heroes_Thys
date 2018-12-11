@@ -29,22 +29,27 @@ public class TestController {
 	
 	public void handleTestAction() {
 		this.count = 0;
-		doTest(count);
+		doTest();
 	}
 	
 	public void handleSubmitAction() {
 		this.selectedAnswers.add(this.testPane.getAsnwer());
 		this.newTestWindow.close();
-		count++;
-		doTest(count);
+		this.count++;
+		doTest();
 	}
 	
-	public void doTest(int x){
-		this.testPane = new TestPane(x, this.questions.get(x), this);
-		Scene newTestScene = new Scene(testPane, 750, 300);
-		this.newTestWindow = new Stage();
-		this.newTestWindow.setScene(newTestScene);
-		this.newTestWindow.show();
+	public void doTest(){
+		if(this.count < this.questions.size()){
+			this.testPane = new TestPane(this.count, this.questions.get(this.count), this);
+			Scene newTestScene = new Scene(testPane, 750, 300);
+			this.newTestWindow = new Stage();
+			this.newTestWindow.setScene(newTestScene);
+			this.newTestWindow.show();
+		}
+		else{
+			this.messagePane.addScore(this.correct());
+		}
 	}
 	
 	public void addSelectedAnswer(String answer){
