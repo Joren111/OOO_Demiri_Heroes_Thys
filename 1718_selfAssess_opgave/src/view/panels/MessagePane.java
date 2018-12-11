@@ -36,7 +36,7 @@ public class MessagePane extends GridPane {
         
 		testButton = new Button("Evaluate");
 		testButton.setOnAction(this::handleTestAction);
-		this.add(testButton, 0,2,1,1);
+		this.add(testButton, 0,10,1,1);
 		setHalignment(testButton, HPos.CENTER);
 	}
 	
@@ -44,9 +44,11 @@ public class MessagePane extends GridPane {
 		this.testController.handleTestAction();
 	}
 	
-	public void addScore(String resultaat){
-		scoreField = new Label("Score=" + resultaat);
-        this.add(scoreField, 0,1,1,1);
+	public void addScore(List<String> resultaat){
+		for(int i = 0; i < resultaat.size(); i++){
+			scoreField = new Label(resultaat.get(i));
+			this.add(scoreField, 0,i+1,1,1);
+		}	
 	}
 	
 	public void addTestController(TestController testController){
