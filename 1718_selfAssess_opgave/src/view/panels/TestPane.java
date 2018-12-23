@@ -3,8 +3,8 @@ package view.panels;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.model.Question;
-import domain.controller.TestController;
+import model.Question;
+import controller.TestController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

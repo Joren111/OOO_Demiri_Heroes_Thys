@@ -1,7 +1,8 @@
 package view.panels;
 
-import domain.controller.TestController;
+import controller.TestController;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
@@ -28,7 +29,7 @@ public class MessagePane extends GridPane {
 		this.setPadding(new Insets(5, 5, 5, 5));
         this.setVgap(5);
         this.setHgap(5);
-        
+
 		testButton = new Button("Evaluate");
 		testButton.setOnAction(this::handleTestAction);
 		this.add(testButton, 0,10,1,1);
@@ -38,7 +39,7 @@ public class MessagePane extends GridPane {
 	public void handleTestAction(ActionEvent event){
 		this.testController.handleTestAction();
 	}
-	
+
 	public void addScore(List<String> resultaat){
 		for(int i = 0; i < resultaat.size(); i++){
 			scoreField = new Label(resultaat.get(i));

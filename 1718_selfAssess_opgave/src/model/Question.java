@@ -1,6 +1,4 @@
-package domain.model;
-
-import java.util.List;
+package model;
 
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;

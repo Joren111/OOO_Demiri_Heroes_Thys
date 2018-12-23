@@ -1,11 +1,12 @@
-package domain.controller;
+package controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.model.Question;
-import domain.db.BadDb;
-import domain.model.Correct;
+import db.PropertyStrategy;
+import model.Question;
+import db.BadDb;
+import model.Correct;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import view.panels.MessagePane;
@@ -19,12 +20,15 @@ public class TestController {
 	private Stage newTestWindow;
 	private Correct correct;
 	private int count;
+
+	private PropertyStrategy prop;
 	
 	public TestController(MessagePane messagePane, Correct correct){
 		this.questions = BadDb.getInstance().getQuestionList();
 		this.selectedAnswers = new ArrayList<String>();
 		this.messagePane = messagePane;
 		this.correct = correct;
+		this.prop = new PropertyStrategy();
 	}
 	
 	public void handleTestAction() {
@@ -48,7 +52,12 @@ public class TestController {
 			this.newTestWindow.show();
 		}
 		else{
-			this.messagePane.addScore(this.correct.feedback(this.selectedAnswers));
+			String property = (String) prop.load().get(0);
+			if(property.equals("score")){
+				this.messagePane.addScore(this.correct.correctPerCategory(this.selectedAnswers));
+			}else{
+				this.messagePane.addScore(this.correct.feedback(this.selectedAnswers));
+			}
 		}
 	}
 	

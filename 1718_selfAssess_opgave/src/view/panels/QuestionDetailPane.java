@@ -1,7 +1,7 @@
 package view.panels;
 
-import domain.db.BadDb;
-import domain.model.Question;
+import db.BadDb;
+import model.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,7 +22,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.swing.plaf.ActionMapUIResource;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

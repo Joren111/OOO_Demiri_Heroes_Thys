@@ -1,19 +1,13 @@
 package application;
 
-import domain.controller.TestController;
-import domain.model.Correct;
+import controller.TestController;
+import model.Correct;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import view.panels.AssesMainPane;
-import view.panels.CategoryDetailPane;
-import view.panels.CategoryOverviewPane;
-import view.panels.MessagePane;
-import view.panels.QuestionDetailPane;
-import view.panels.QuestionOverviewPane;
-import view.panels.TestPane;
+import view.panels.*;
 
 public class Main extends Application {
 	@Override
@@ -27,6 +21,9 @@ public class Main extends Application {
 			CategoryDetailPane categoryDetailPanel = new CategoryDetailPane();
 
 			MessagePane messagePane = new MessagePane();
+
+			EvaluationChangePane evaluationChangePane = new EvaluationChangePane();
+
 			Correct correct = new Correct();
 			TestController testController = new TestController(messagePane, correct);
 			messagePane.addTestController(testController);
@@ -34,7 +31,7 @@ public class Main extends Application {
 			Group root = new Group();
 			Scene scene = new Scene(root, 750, 400);
 
-			BorderPane borderPane = new AssesMainPane(messagePane, categoryOverviewPanel, questionOverviewPane);
+			BorderPane borderPane = new AssesMainPane(messagePane, categoryOverviewPanel, questionOverviewPane, evaluationChangePane);
 			borderPane.prefHeightProperty().bind(scene.heightProperty());
 			borderPane.prefWidthProperty().bind(scene.widthProperty());
 

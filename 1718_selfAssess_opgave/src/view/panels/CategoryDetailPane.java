@@ -1,7 +1,7 @@
 package view.panels;
 
-import domain.model.Category;
-import domain.db.BadDb;
+import model.Category;
+import db.BadDb;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

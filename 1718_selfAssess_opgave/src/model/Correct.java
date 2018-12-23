@@ -1,6 +1,6 @@
-package domain.model;
+package model;
 
-import domain.db.BadDb;
+import db.BadDb;
 
 import java.util.ArrayList;
 import java.util.List;

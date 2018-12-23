@@ -1,6 +1,6 @@
 package view.panels;
 
-import domain.db.BadDb;
+import db.BadDb;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,8 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import javax.swing.plaf.ActionMapUIResource;
 
 public class QuestionOverviewPane extends GridPane {
     private TableView table;
