@@ -33,6 +33,7 @@ public class Correct {
 		int score, total, all=0, allscore=0;
 		List<String> list = new ArrayList<String>();
 		String correct, answer, resultaat = "";
+		System.out.println(this.getCategoryList().size());
 		for(int i=0; i < this.getCategoryList().size(); i++){
 			total = 0;
 			score = 0;
@@ -55,6 +56,26 @@ public class Correct {
 		list.add(resultaat);
 		return list;
 	}
+
+	public List<String> feedback(List<String> selectedAnswers){
+		List<String> list = new ArrayList<>();
+		String correct, answer, feedback = "";
+		for(int i=0; i < this.getCategoryList().size(); i++){
+
+			for(int j=0; j < this.questions.size(); j++){
+				if(getCategoryList().get(i).equals(questions.get(j).getCategory())){
+					correct = this.questions.get(i).getCorrectAnswer();
+					answer = selectedAnswers.get(i);
+					if(!answer.equals(correct)){
+						feedback = questions.get(j).getFeedback();
+						list.add(feedback);
+					}
+				}
+			}
+		}
+		return list;
+	}
+
 	private List<String> getCategoryList(){
 		Set<String> categoriesSet = new TreeSet<String>();
 		for(int i = 0; i< this.categories.size(); i++){

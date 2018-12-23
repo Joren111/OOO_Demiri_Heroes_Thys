@@ -65,10 +65,11 @@ public class BadDb {
                     List<String> answers = new ArrayList<>();
                     ObservableList<String> answersList;
                     String data[] = s.split(",");
+                    question.setFeedback(data[2]);
                     question.setQuestion(data[0]);
                     question.setCategory(data[1]);
-                    question.setCorrectAnswer(data[2]);
-                    for(int i=2; i < data.length; i++){
+                    question.setCorrectAnswer(data[3]);
+                    for(int i=3; i < data.length; i++){
                     	answers.add(data[i]);
                     }
                     answersList = FXCollections.observableArrayList(answers);

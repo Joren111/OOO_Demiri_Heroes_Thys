@@ -48,7 +48,7 @@ public class TestController {
 			this.newTestWindow.show();
 		}
 		else{
-			this.messagePane.addScore(this.correct.correctPerCategory(this.selectedAnswers));
+			this.messagePane.addScore(this.correct.feedback(this.selectedAnswers));
 		}
 	}
 	

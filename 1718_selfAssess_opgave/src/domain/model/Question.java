@@ -10,8 +10,17 @@ import javafx.collections.ObservableList;
 
 public class Question {
 private StringProperty question, category, correctAnswer;
+private String feedback;
 private ListProperty answers;
-	
+
+	public String getFeedback() {
+		return feedback;
+	}
+
+	public void setFeedback(String feedback) {
+		this.feedback = feedback;
+	}
+
 	public void setQuestion(String x){
 		questionProperty().set(x);
 		

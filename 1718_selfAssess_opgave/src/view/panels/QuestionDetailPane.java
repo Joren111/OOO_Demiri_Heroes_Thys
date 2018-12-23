@@ -162,11 +162,13 @@ public class QuestionDetailPane extends GridPane {
 			dialogStage.show();
 			setErrorOkAction(this::handleErrorButtonAction);
 		}
+
 		Iterator<String> iter = statementList.iterator();
 		while(iter.hasNext()){
 			answers.add(iter.next());
 		}
 		question.setAnswers(answers);
+		question.setFeedback(feedbackField.getText());
 		BadDb.getInstance().getQuestionList().add(question);
 		Stage stage = (Stage) getScene().getWindow();
 		stage.close();
