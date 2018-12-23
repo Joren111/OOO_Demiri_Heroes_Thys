@@ -2,9 +2,17 @@ package domain.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
+import domain.Category;
+import domain.Question;
 import domain.model.Question;
 import domain.db.BadDb;
+import domain.model.Correct;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import view.panels.MessagePane;
@@ -16,12 +24,14 @@ public class TestController {
 	private List<String> selectedAnswers;
 	private List<Question> questions;
 	private Stage newTestWindow;
+	private Correct correct;
 	private int count;
 	
-	public TestController(MessagePane messagePane){
+	public TestController(MessagePane messagePane, Correct correct){
 		this.questions = BadDb.getInstance().getQuestionList();
 		this.selectedAnswers = new ArrayList<String>();
 		this.messagePane = messagePane;
+		this.correct = correct;
 	}
 	
 	public void handleTestAction() {
@@ -45,26 +55,11 @@ public class TestController {
 			this.newTestWindow.show();
 		}
 		else{
-			this.messagePane.addScore(this.correct());
+			this.messagePane.addScore(this.correct.correctPerCategory(this.selectedAnswers));
 		}
 	}
 	
 	public void addSelectedAnswer(String answer){
 		this.selectedAnswers.add(answer);
-	}
-	
-	public String correct(){
-		int score = 0, total=0;
-		String correct, answer, resultaat = "";
-		for(int i=0; i < questions.size(); i++){
-			correct = this.questions.get(i).getCorrectAnswer();
-			answer = this.selectedAnswers.get(i);
-			total++;
-			if(answer.equals(correct)){
-				score++;
-			}
-		}
-		resultaat = score + "/" + total;
-		return resultaat;
 	}
 }

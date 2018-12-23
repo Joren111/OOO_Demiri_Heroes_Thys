@@ -1,6 +1,7 @@
 package application;
 
 import domain.controller.TestController;
+import domain.model.Correct;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -26,7 +27,8 @@ public class Main extends Application {
 			CategoryDetailPane categoryDetailPanel = new CategoryDetailPane();
 
 			MessagePane messagePane = new MessagePane();
-			TestController testController = new TestController(messagePane);
+			Correct correct = new Correct();
+			TestController testController = new TestController(messagePane, correct);
 			messagePane.addTestController(testController);
 
 			Group root = new Group();
