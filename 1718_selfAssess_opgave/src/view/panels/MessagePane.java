@@ -14,6 +14,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
+import java.util.List;
+
 public class MessagePane extends GridPane {
 	private Label scoreField;
 	private Button testButton;

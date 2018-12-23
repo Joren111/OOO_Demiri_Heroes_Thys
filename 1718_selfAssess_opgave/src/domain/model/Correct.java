@@ -1,13 +1,11 @@
 package domain.model;
 
+import domain.db.BadDb;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-
-import domain.Category;
-import domain.Question;
-import domain.db.BadDb;
 
 public class Correct {
 	private List<Question> questions;
