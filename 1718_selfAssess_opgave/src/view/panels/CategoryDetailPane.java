@@ -1,6 +1,6 @@
 package view.panels;
 
-import domain.Category;
+import domain.model.Category;
 import domain.db.BadDb;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -63,6 +63,8 @@ public class CategoryDetailPane extends GridPane {
         }
 
         BadDb.getInstance().getCategoryList().add(category);
+        Stage stage = (Stage) getScene().getWindow();
+        stage.close();
     }
 
     private void handleCancelButtonAction(ActionEvent event) {

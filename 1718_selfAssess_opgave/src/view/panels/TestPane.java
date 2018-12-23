@@ -1,28 +1,19 @@
 package view.panels;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.Question;
+import domain.model.Question;
 import domain.controller.TestController;
-import domain.db.BadDb;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
 
 public class TestPane extends GridPane {
 	private Label questionField;

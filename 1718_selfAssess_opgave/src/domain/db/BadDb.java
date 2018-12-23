@@ -1,7 +1,7 @@
 package domain.db;
 
-import domain.Category;
-import domain.Question;
+import domain.model.Category;
+import domain.model.Question;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

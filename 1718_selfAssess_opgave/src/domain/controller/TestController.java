@@ -3,11 +3,8 @@ package domain.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import domain.Question;
+import domain.model.Question;
 import domain.db.BadDb;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import view.panels.MessagePane;

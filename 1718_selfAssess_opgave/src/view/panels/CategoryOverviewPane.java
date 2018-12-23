@@ -1,9 +1,7 @@
 package view.panels;
 
-import domain.Category;
+import domain.model.Category;
 import domain.db.BadDb;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -15,12 +13,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.List;
 
 public class CategoryOverviewPane extends GridPane {
     private TableView<Category> table;
