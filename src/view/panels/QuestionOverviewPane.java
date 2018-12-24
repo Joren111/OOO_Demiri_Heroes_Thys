@@ -77,7 +77,7 @@ public class QuestionOverviewPane extends GridPane {
         if (o != null) {
             if (o instanceof Question) {
                 Question question = (Question) o;
-                editLayout = new QuestionDetailPane(question.getQuestion(), question.getFeedback(), question.getCategory(), question.getAnswers());
+                editLayout = new QuestionDetailPane(question);
                 Scene newEditScene = new Scene(editLayout, 500, 300);
                 Stage newEditWindow = new Stage();
                 newEditWindow.setScene(newEditScene);

@@ -90,7 +90,7 @@ public class CategoryDetailPane extends GridPane {
 
     public void setCancelAction(EventHandler<ActionEvent> cancelAction) {
         btnCancel.setOnAction(cancelAction);
-    }
+}
 
     private void handleSaveButtonAction(ActionEvent event) {
         Category category = new Category();

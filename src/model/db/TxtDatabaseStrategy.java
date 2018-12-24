@@ -72,6 +72,12 @@ public class TxtDatabaseStrategy implements DatabaseStrategy {
                 String[] data = s.split(",");
                 question.setQuestion(data[0]);
                 question.setCategory(data[1]);
+                question.setFeedback(data[2]);
+
+                String[] answers = data[3].split(";");
+                question.setCorrectAnswer(answers[0]);
+
+                question.setAnswers(FXCollections.observableArrayList(answers));
                 list.add(question);
             }
 

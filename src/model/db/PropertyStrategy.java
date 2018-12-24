@@ -12,7 +12,7 @@ public class PropertyStrategy {
 
     public ArrayList load() {
         try {
-            InputStream i = new FileInputStream("C:/Users/Admin/OOO_Demiri_Heroes_Thys/1718_selfAssess_opgave/testdatabase/evaluation.properties");
+            InputStream i = new FileInputStream("C:/Users/Admin/OOO_Demiri_Heroes_Thys/testdatabase/evaluation.properties");
             properties.load(i);
             content.add(properties.getProperty("evaluation.mode"));
         } catch (Exception e) {
@@ -33,7 +33,7 @@ public class PropertyStrategy {
         ArrayList<String> strategies = (ArrayList<String>) content;
         String strategy = strategies.get(0);
         try {
-            OutputStream outputStream = new FileOutputStream("C:/Users/Admin/OOO_Demiri_Heroes_Thys/1718_selfAssess_opgave/testdatabase/evaluation.properties");
+            OutputStream outputStream = new FileOutputStream("C:/Users/Admin/OOO_Demiri_Heroes_Thys/testdatabase/evaluation.properties");
             properties.setProperty("evaluation.mode", strategy);
             properties.store(outputStream, null);
         } catch (Exception e) {
