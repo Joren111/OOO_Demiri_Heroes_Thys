@@ -25,7 +25,7 @@ public class TestController {
 	
 	public TestController(MessagePane messagePane, Correct correct){
 		this.questions = BadDb.getInstance().getQuestionList();
-		this.selectedAnswers = new ArrayList<String>();
+
 		this.messagePane = messagePane;
 		this.correct = correct;
 		this.prop = new PropertyStrategy();
@@ -33,6 +33,7 @@ public class TestController {
 	
 	public void handleTestAction() {
 		this.count = 0;
+		this.selectedAnswers = new ArrayList<String>();
 		doTest();
 	}
 	

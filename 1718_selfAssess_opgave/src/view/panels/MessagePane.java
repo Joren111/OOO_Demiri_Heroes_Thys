@@ -30,6 +30,10 @@ public class MessagePane extends GridPane {
         this.setVgap(5);
         this.setHgap(5);
 
+        scoreField = new Label();
+        scoreField.setText("You never did this evaluation");
+        this.add(scoreField, 0,5,1,1);
+
 		testButton = new Button("Evaluate");
 		testButton.setOnAction(this::handleTestAction);
 		this.add(testButton, 0,10,1,1);
@@ -37,13 +41,15 @@ public class MessagePane extends GridPane {
 	}
 	
 	public void handleTestAction(ActionEvent event){
+		scoreField.setText("");
 		this.testController.handleTestAction();
 	}
 
 	public void addScore(List<String> resultaat){
+		scoreField.setText("");
 		for(int i = 0; i < resultaat.size(); i++){
-			scoreField = new Label(resultaat.get(i));
-			this.add(scoreField, 0,i+1,1,1);
+			String temp = scoreField.getText();
+			scoreField.setText(temp + resultaat.get(i) + "\n");
 		}	
 	}
 	
