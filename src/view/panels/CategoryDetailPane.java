@@ -42,6 +42,7 @@ public class CategoryDetailPane extends GridPane {
         categoryField = new ComboBox<>();
         categoryField.setItems(BadDb.getInstance().getCategoryList());
         this.add(categoryField, 1, 2, 1, 1);
+        categoryField.getSelectionModel().select(categoryToUpdate.getSubCategory());
 
         btnCancel = new Button("Cancel");
         setCancelAction(this::handleCancelButtonAction);

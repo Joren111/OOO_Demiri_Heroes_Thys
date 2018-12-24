@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Correct;
+import model.db.BadDb;
 import view.panels.*;
 
 public class Main extends Application {
@@ -47,5 +48,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        BadDb.getInstance().save();
     }
 }

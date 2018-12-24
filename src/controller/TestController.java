@@ -5,7 +5,8 @@ import javafx.stage.Stage;
 import model.Correct;
 import model.Question;
 import model.db.BadDb;
-import model.db.PropertyStrategy;
+import model.db.PropertySettingsStrategy;
+import model.db.SettingsStrategy;
 import view.panels.MessagePane;
 import view.panels.TestPane;
 
@@ -21,14 +22,14 @@ public class TestController {
     private Correct correct;
     private int count;
 
-    private PropertyStrategy prop;
+    private SettingsStrategy prop;
 
     public TestController(MessagePane messagePane, Correct correct) {
         this.questions = BadDb.getInstance().getQuestionList();
 
         this.messagePane = messagePane;
         this.correct = correct;
-        this.prop = new PropertyStrategy();
+        this.prop = new PropertySettingsStrategy();
     }
 
     public void handleTestAction() {

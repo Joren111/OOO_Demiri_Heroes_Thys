@@ -33,12 +33,12 @@ public class Category {
         return description;
     }
 
-    public Category getSubCategory(Category category) {
-        return category;
+    public Category getSubCategory() {
+        return this.subCategory;
     }
 
     public void setSubCategory(Category category) {
-        subCategory = category;
+        this.subCategory = category;
     }
 
     @Override

@@ -4,15 +4,16 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class PropertyStrategy {
+public class PropertySettingsStrategy implements SettingsStrategy {
     private Properties properties = new Properties();
     InputStream inputStream = null;
     OutputStream outputStream;
     ArrayList<String> content = new ArrayList<>();
 
+    @Override
     public ArrayList load() {
         try {
-            InputStream i = new FileInputStream("C:/Users/Admin/OOO_Demiri_Heroes_Thys/testdatabase/evaluation.properties");
+            InputStream i = this.getClass().getResourceAsStream("/evaluation.properties");
             properties.load(i);
             content.add(properties.getProperty("evaluation.mode"));
         } catch (Exception e) {
@@ -29,11 +30,12 @@ public class PropertyStrategy {
         return content;
     }
 
+    @Override
     public void save(ArrayList content) {
         ArrayList<String> strategies = (ArrayList<String>) content;
         String strategy = strategies.get(0);
         try {
-            OutputStream outputStream = new FileOutputStream("C:/Users/Admin/OOO_Demiri_Heroes_Thys/testdatabase/evaluation.properties");
+            OutputStream outputStream = new FileOutputStream(new File(this.getClass().getResource("/evaluation.properties").getPath()));
             properties.setProperty("evaluation.mode", strategy);
             properties.store(outputStream, null);
         } catch (Exception e) {

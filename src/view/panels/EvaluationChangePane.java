@@ -12,18 +12,18 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.db.PropertyStrategy;
+import model.db.PropertySettingsStrategy;
+import model.db.SettingsStrategy;
 
 import java.util.ArrayList;
 
 
 public class EvaluationChangePane extends GridPane {
-    private PropertyStrategy prop;
-    private Button evaluationModeButton, btnOk;
-    private boolean close = false;
+    private SettingsStrategy prop;
+    private Button evaluationModeButton;
 
     public EvaluationChangePane() {
-        prop = new PropertyStrategy();
+        prop = new PropertySettingsStrategy();
 
         evaluationModeButton = new Button("Change evaluation mode");
         setChangeEvaluationAction(this::handleEvaluationChange);
@@ -45,7 +45,7 @@ public class EvaluationChangePane extends GridPane {
         Stage dialogStage = new Stage();
         dialogStage.initModality(Modality.WINDOW_MODAL);
 
-        btnOk = new Button("Ok");
+        Button btnOk = new Button("Ok");
         VBox vbox;
         vbox = new VBox(new Text("Restart application neccesary for changes"), btnOk);
         vbox.setAlignment(Pos.CENTER);
@@ -53,11 +53,6 @@ public class EvaluationChangePane extends GridPane {
 
         dialogStage.setScene(new Scene(vbox));
         dialogStage.show();
-        btnOk.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                System.exit(0);
-            }
-        });
+        btnOk.setOnAction(event1 -> System.exit(0));
     }
 }
