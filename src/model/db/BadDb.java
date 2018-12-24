@@ -8,6 +8,7 @@ public class BadDb {
         if (instance == null) {
             instance = new DatabaseContext();
             instance.setDatabaseStrategy(new TxtDatabaseStrategy());
+            instance.getDatabaseStrategy().load();
         }
 
         return instance.getDatabaseStrategy();

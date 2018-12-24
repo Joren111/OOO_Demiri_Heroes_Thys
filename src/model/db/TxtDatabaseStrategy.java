@@ -40,7 +40,7 @@ public class TxtDatabaseStrategy implements DatabaseStrategy {
         List<Category> list = new ArrayList<>();
         BufferedReader br;
         try {
-            br = new BufferedReader(new FileReader("C:/Users/Admin/OOO_Demiri_Heroes_Thys/1718_selfAssess_opgave/testdatabase/groep.txt"));
+            br = new BufferedReader(new FileReader("C:/Users/Admin/OOO_Demiri_Heroes_Thys/testdatabase/groep.txt"));
             String s;
             while ((s = br.readLine()) != null) {
                 Category category = new Category();
@@ -65,7 +65,7 @@ public class TxtDatabaseStrategy implements DatabaseStrategy {
         List<Question> list = new ArrayList<>();
         BufferedReader br;
         try {
-            br = new BufferedReader(new FileReader("C:/Users/Admin/OOO_Demiri_Heroes_Thys/1718_selfAssess_opgave/testdatabase/vraag.txt"));
+            br = new BufferedReader(new FileReader("C:/Users/Admin/OOO_Demiri_Heroes_Thys/testdatabase/vraag.txt"));
             String s;
             while ((s = br.readLine()) != null) {
                 Question question = new Question();
