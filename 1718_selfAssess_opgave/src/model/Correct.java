@@ -30,48 +30,56 @@ public class Correct {
 	}
 
 	public List<String> correctPerCategory(List<String> selectedAnswers){
-		int score, total, all=0, allscore=0;
 		List<String> list = new ArrayList<String>();
-		String correct, answer, resultaat = "";
-		System.out.println(this.getCategoryList().size());
-		for(int i=0; i < this.getCategoryList().size(); i++){
-			total = 0;
-			score = 0;
-			for(int j=0; j < this.questions.size(); j++){
-				if(getCategoryList().get(i).equals(questions.get(j).getCategory())){
-					total++;
-					correct = this.questions.get(i).getCorrectAnswer();
-					answer = selectedAnswers.get(i);
-					if(answer.equals(correct)){
-						score++;
+		if(!allCorrect(selectedAnswers)){
+			int score, total, all=0, allscore=0;
+			String correct, answer, resultaat = "";
+			for(int i=0; i < this.getCategoryList().size(); i++){
+				total = 0;
+				score = 0;
+				for(int j=0; j < this.questions.size(); j++){
+					if(getCategoryList().get(i).equals(questions.get(j).getCategory())){
+						total++;
+						correct = this.questions.get(i).getCorrectAnswer();
+						answer = selectedAnswers.get(i);
+						if(answer.equals(correct)){
+							score++;
+						}
 					}
 				}
+				resultaat = getCategoryList().get(i) + score + "/" + total;
+				list.add(resultaat);
+				all += total;
+				allscore += score;
 			}
-			resultaat = getCategoryList().get(i) + score + "/" + total;
+			resultaat = "score=" + allscore + "/" + all;
 			list.add(resultaat);
-			all += total;
-			allscore += score;
+
+		}else{
+			list.add("Schitterend! Alles perfect!");
 		}
-		resultaat = "score=" + allscore + "/" + all;
-		list.add(resultaat);
 		return list;
 	}
 
 	public List<String> feedback(List<String> selectedAnswers){
-		List<String> list = new ArrayList<>();
-		String correct, answer, feedback = "";
-		for(int i=0; i < this.getCategoryList().size(); i++){
+		List<String> list = new ArrayList<String>();
+		if(!allCorrect(selectedAnswers)){
+			String correct, answer, feedback = "";
+			for(int i=0; i < this.getCategoryList().size(); i++){
 
-			for(int j=0; j < this.questions.size(); j++){
-				if(getCategoryList().get(i).equals(questions.get(j).getCategory())){
-					correct = this.questions.get(i).getCorrectAnswer();
-					answer = selectedAnswers.get(i);
-					if(!answer.equals(correct)){
-						feedback = questions.get(j).getFeedback();
-						list.add(feedback);
+				for(int j=0; j < this.questions.size(); j++){
+					if(getCategoryList().get(i).equals(questions.get(j).getCategory())){
+						correct = this.questions.get(i).getCorrectAnswer();
+						answer = selectedAnswers.get(i);
+						if(!answer.equals(correct)){
+							feedback = questions.get(j).getFeedback();
+							list.add(feedback);
+						}
 					}
 				}
 			}
+		}else{
+			list.add("Schitterend! Alles perfect!");
 		}
 		return list;
 	}
@@ -83,5 +91,31 @@ public class Correct {
 		}
 		List<String> list = new ArrayList<String>(categoriesSet);
 		return list;
+	}
+
+	private boolean allCorrect(List<String> selectedAnswers){
+		int score = 0, total = 0, all=0, allscore=0;
+		String correct, answer;
+		for(int i=0; i < this.getCategoryList().size(); i++){
+			total = 0;
+			score = 0;
+			for(int j=0; j < this.questions.size(); j++){
+				if(getCategoryList().get(i).equals(questions.get(j).getCategory())){
+					total++;
+					answer = selectedAnswers.get(i);
+					correct = this.questions.get(i).getCorrectAnswer();
+					if(answer.equals(correct)){
+						score++;
+					}
+				}
+			}
+			all += total;
+			allscore += score;
+		}
+		if(all==allscore){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
