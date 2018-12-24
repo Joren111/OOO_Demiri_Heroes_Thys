@@ -46,7 +46,7 @@ public class TestController {
 
     public void doTest() {
         if (this.count < this.questions.size()) {
-            this.testPane = new TestPane(this.count, this.questions.get(this.count), this);
+            this.testPane = new TestPane(this.questions.get(this.count), this);
             Scene newTestScene = new Scene(testPane, 750, 300);
             this.newTestWindow = new Stage();
             this.newTestWindow.setScene(newTestScene);
