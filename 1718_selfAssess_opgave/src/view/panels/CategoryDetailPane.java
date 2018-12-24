@@ -12,10 +12,46 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class CategoryDetailPane extends GridPane {
     private Button btnOK, btnCancel;
     private TextField titleField, descriptionField;
     private ComboBox categoryField;
+
+    public CategoryDetailPane(String title, String description){
+        this.setPrefHeight(150);
+        this.setPrefWidth(300);
+
+        this.setPadding(new Insets(5, 5, 5, 5));
+        this.setVgap(5);
+        this.setHgap(5);
+
+        this.add(new Label("Title:"), 0, 0, 1, 1);
+        titleField = new TextField();
+        titleField.setText(title);
+        this.add(titleField, 1, 0, 1, 1);
+
+        this.add(new Label("Description:"), 0, 1, 1, 1);
+        descriptionField = new TextField();
+        descriptionField.setText(description);
+        this.add(descriptionField, 1, 1, 1, 1);
+
+        this.add(new Label("Main Category:"), 0, 2, 1, 1);
+        categoryField = new ComboBox<>();
+        categoryField.setItems(BadDb.getInstance().getCategoryList());
+        this.add(categoryField, 1, 2, 1, 1);
+
+        btnCancel = new Button("Cancel");
+        setCancelAction(this::handleCancelButtonAction);
+        this.add(btnCancel, 0, 3, 1, 1);
+
+        btnOK = new Button("Update");
+        btnOK.isDefaultButton();
+        setSaveAction(this::handleSaveButtonAction);
+        this.add(btnOK, 1, 3, 1, 1);
+    }
 
     public CategoryDetailPane() throws Exception {
         this.setPrefHeight(150);
@@ -48,6 +84,14 @@ public class CategoryDetailPane extends GridPane {
         this.add(btnOK, 1, 3, 1, 1);
     }
 
+    public void setSaveAction(EventHandler<ActionEvent> saveAction) {
+        btnOK.setOnAction(saveAction);
+    }
+
+    public void setCancelAction(EventHandler<ActionEvent> cancelAction) {
+        btnCancel.setOnAction(cancelAction);
+    }
+
     private void handleSaveButtonAction(ActionEvent event) {
         Category category = new Category();
         category.setTitle(titleField.getText());
@@ -71,13 +115,4 @@ public class CategoryDetailPane extends GridPane {
         Stage stage = (Stage) btnCancel.getScene().getWindow();
         stage.close();
     }
-
-    public void setSaveAction(EventHandler<ActionEvent> saveAction) {
-        btnOK.setOnAction(saveAction);
-    }
-
-    public void setCancelAction(EventHandler<ActionEvent> cancelAction) {
-        btnCancel.setOnAction(cancelAction);
-    }
-
 }

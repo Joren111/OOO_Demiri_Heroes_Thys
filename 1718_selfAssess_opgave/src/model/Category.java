@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 public class Category {
 	private StringProperty title, description;
 	private Category subCategory;
-	
+
 	public void setTitle(String x){
 		titleProperty().set(x);
 	}

@@ -36,6 +36,73 @@ public class QuestionDetailPane extends GridPane {
 
 	private ObservableList<String> answers;
 
+	public QuestionDetailPane(String question, String feedback,String category, ObservableList<String> statements) {
+		answers = FXCollections.observableArrayList();
+		this.setPrefHeight(300);
+		this.setPrefWidth(320);
+
+		this.setPadding(new Insets(5, 5, 5, 5));
+		this.setVgap(5);
+		this.setHgap(5);
+
+		add(new Label("Question: "), 0, 0, 1, 1);
+		questionField = new TextField();
+		questionField.setText(question);
+		add(questionField, 1, 0, 2, 1);
+
+		add(new Label("Statement: "), 0, 1, 1, 1);
+		statementField = new TextField();
+		add(statementField, 1, 1, 2, 1);
+
+		add(new Label("Statements: "), 0, 2, 1, 1);
+		statementsArea = new TextArea();
+		statementsArea.setPrefRowCount(5);
+		statementsArea.setEditable(false);
+
+		for(String s: statements){
+			statementList.add(s);
+		}
+
+		for (String s : statementList) {
+			String temp = statementsArea.getText();
+			statementsArea.setText(temp + s + "\n");
+		}
+
+		add(statementsArea, 1, 2, 2, 5);
+
+		Pane addRemove = new HBox();
+		btnAdd = new Button("add");
+		btnAdd.setOnAction(this::handleAddButtonAction);
+		addRemove.getChildren().add(btnAdd);
+
+		btnRemove = new Button("remove");
+		btnRemove.setOnAction(this::handleRemoveButtonAction);
+		addRemove.getChildren().add(btnRemove);
+		add(addRemove, 1, 8, 2, 1);
+
+		add(new Label("Category: "), 0, 9, 1, 1);
+		categoryField = new ComboBox();
+		categoryField.setItems(BadDb.getInstance().getCategoryList());
+		add(categoryField, 1, 9, 2, 1);
+		categoryField.getSelectionModel().select(category);
+
+		add(new Label("Feedback: "), 0, 10, 1, 1);
+		feedbackField = new TextField();
+		feedbackField.setText(feedback);
+		add(feedbackField, 1, 10, 2, 1);
+
+		btnCancel = new Button("Cancel");
+		btnCancel.setText("Cancel");
+		setCancelAction(this::handleCancleButtonAction);
+		add(btnCancel, 0, 11, 1, 1);
+
+		btnOK = new Button("Save");
+		btnOK.isDefaultButton();
+		btnOK.setText("Save");
+		setSaveAction(this::handleSaveButtonAction);
+		add(btnOK, 1, 11, 2, 1);
+	}
+
 	public QuestionDetailPane() {
 		answers = FXCollections.observableArrayList();
 		this.setPrefHeight(300);
@@ -98,14 +165,6 @@ public class QuestionDetailPane extends GridPane {
 		btnCancel.setOnAction(cancelAction);
 	}
 
-	public void setAddAction(EventHandler<ActionEvent> addAction){
-		btnAdd.setOnAction(addAction);
-	}
-
-	public void setRemoveAction(EventHandler<ActionEvent> removeAction){
-		btnRemove.setOnAction(removeAction);
-	}
-
 	public void setErrorOkAction(EventHandler<ActionEvent> errorOkAction) { btnError.setOnAction(errorOkAction);}
 
 	public void handleAddButtonAction(ActionEvent event){
@@ -153,7 +212,7 @@ public class QuestionDetailPane extends GridPane {
 
 			btnError = new Button("Ok");
 			VBox vbox;
-			vbox = new VBox(new Text("No statements where given"), btnError);
+			vbox = new VBox(new Text("No statements were given"), btnError);
 			vbox.setAlignment(Pos.CENTER);
 			vbox.setPadding(new Insets(30));
 
