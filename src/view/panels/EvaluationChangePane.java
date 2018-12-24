@@ -1,7 +1,5 @@
 package view.panels;
 
-import db.PropertyStrategy;
-import javafx.beans.value.ObservableStringValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -14,21 +12,22 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.db.PropertyStrategy;
 
 import java.util.ArrayList;
 
 
 public class EvaluationChangePane extends GridPane {
     private PropertyStrategy prop;
-    private Button evaluationModeButton,btnOk;
+    private Button evaluationModeButton, btnOk;
     private boolean close = false;
 
-    public EvaluationChangePane (){
+    public EvaluationChangePane() {
         prop = new PropertyStrategy();
 
         evaluationModeButton = new Button("Change evaluation mode");
         setChangeEvaluationAction(this::handleEvaluationChange);
-        this.add(evaluationModeButton, 0,10,1,1);
+        this.add(evaluationModeButton, 0, 10, 1, 1);
         setHalignment(evaluationModeButton, HPos.CENTER);
     }
 
@@ -36,11 +35,11 @@ public class EvaluationChangePane extends GridPane {
         evaluationModeButton.setOnAction(changeAction);
     }
 
-    public void handleEvaluationChange(ActionEvent event){
+    public void handleEvaluationChange(ActionEvent event) {
         String property = (String) prop.load().get(0);
 
         ArrayList<String> content = new ArrayList<>();
-        if(property.equals("score") ? content.add("feedback"): content.add("score"));
+        if (property.equals("score") ? content.add("feedback") : content.add("score")) ;
         prop.save(content);
 
         Stage dialogStage = new Stage();

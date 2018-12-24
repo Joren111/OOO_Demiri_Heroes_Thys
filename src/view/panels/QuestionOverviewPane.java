@@ -1,6 +1,5 @@
 package view.panels;
 
-import db.BadDb;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -11,19 +10,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.Question;
-
-import java.util.ArrayList;
+import model.db.BadDb;
 
 public class QuestionOverviewPane extends GridPane {
     private TableView table;
-    private Button btnNew,btnEdit,btnError;
+    private Button btnNew, btnEdit, btnError;
 
     public QuestionOverviewPane() throws Exception {
         this.setPadding(new Insets(5, 5, 5, 5));
@@ -53,14 +50,14 @@ public class QuestionOverviewPane extends GridPane {
         this.add(btnEdit, 2, 11, 1, 1);
     }
 
-    private void handleButtonAction(ActionEvent event){
+    private void handleButtonAction(ActionEvent event) {
         GridPane secondaryLayout = null;
-        try{
+        try {
             secondaryLayout = new QuestionDetailPane();
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        Scene newQuestionScene = new Scene(secondaryLayout,500,300);
+        Scene newQuestionScene = new Scene(secondaryLayout, 500, 300);
         Stage newQuestionWindow = new Stage();
         newQuestionWindow.setScene(newQuestionScene);
         newQuestionWindow.show();
@@ -74,19 +71,19 @@ public class QuestionOverviewPane extends GridPane {
         btnEdit.setOnAction(editAction);
     }
 
-    public void handleEditAction(ActionEvent event){
+    public void handleEditAction(ActionEvent event) {
         GridPane editLayout = null;
         Object o = table.getSelectionModel().getSelectedItem();
-        if(o != null){
-            if(o instanceof Question){
+        if (o != null) {
+            if (o instanceof Question) {
                 Question question = (Question) o;
-                editLayout = new QuestionDetailPane(question.getQuestion(),question.getFeedback(), question.getCategory(), question.getAnswers());
-                Scene newEditScene = new Scene(editLayout,500,300);
+                editLayout = new QuestionDetailPane(question.getQuestion(), question.getFeedback(), question.getCategory(), question.getAnswers());
+                Scene newEditScene = new Scene(editLayout, 500, 300);
                 Stage newEditWindow = new Stage();
                 newEditWindow.setScene(newEditScene);
                 newEditWindow.show();
             }
-        }else{
+        } else {
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.WINDOW_MODAL);
 
@@ -102,9 +99,11 @@ public class QuestionOverviewPane extends GridPane {
         }
     }
 
-    public void setErrorOkAction(EventHandler<ActionEvent> errorOkAction) { btnError.setOnAction(errorOkAction);}
+    public void setErrorOkAction(EventHandler<ActionEvent> errorOkAction) {
+        btnError.setOnAction(errorOkAction);
+    }
 
-    public void handleErrorButtonAction(ActionEvent event){
+    public void handleErrorButtonAction(ActionEvent event) {
         Stage stage = (Stage) btnError.getScene().getWindow();
         stage.close();
     }

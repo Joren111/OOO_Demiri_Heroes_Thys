@@ -1,7 +1,5 @@
 package view.panels;
 
-import model.Category;
-import db.BadDb;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -11,16 +9,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import java.util.Iterator;
-import java.util.List;
+import model.Category;
+import model.db.BadDb;
 
 public class CategoryDetailPane extends GridPane {
     private Button btnOK, btnCancel;
     private TextField titleField, descriptionField;
     private ComboBox categoryField;
+    private Category categoryToUpdate;
 
-    public CategoryDetailPane(String title, String description){
+    public CategoryDetailPane(Category categoryToUpdate) {
+        this.categoryToUpdate = categoryToUpdate;
+
         this.setPrefHeight(150);
         this.setPrefWidth(300);
 
@@ -30,12 +30,12 @@ public class CategoryDetailPane extends GridPane {
 
         this.add(new Label("Title:"), 0, 0, 1, 1);
         titleField = new TextField();
-        titleField.setText(title);
+        titleField.setText(categoryToUpdate.getTitle());
         this.add(titleField, 1, 0, 1, 1);
 
         this.add(new Label("Description:"), 0, 1, 1, 1);
         descriptionField = new TextField();
-        descriptionField.setText(description);
+        descriptionField.setText(categoryToUpdate.getDescription());
         this.add(descriptionField, 1, 1, 1, 1);
 
         this.add(new Label("Main Category:"), 0, 2, 1, 1);
@@ -49,7 +49,7 @@ public class CategoryDetailPane extends GridPane {
 
         btnOK = new Button("Update");
         btnOK.isDefaultButton();
-        setSaveAction(this::handleSaveButtonAction);
+        setSaveAction(this::handleUpdateButtonAction);
         this.add(btnOK, 1, 3, 1, 1);
     }
 
@@ -107,6 +107,27 @@ public class CategoryDetailPane extends GridPane {
         }
 
         BadDb.getInstance().getCategoryList().add(category);
+        Stage stage = (Stage) getScene().getWindow();
+        stage.close();
+    }
+
+    private void handleUpdateButtonAction(ActionEvent event) {
+        if (categoryToUpdate != null) {
+            categoryToUpdate.setTitle(titleField.getText());
+            categoryToUpdate.setDescription(descriptionField.getText());
+
+            Category subCategorySelected = (Category) categoryField.getValue();
+            if (subCategorySelected != null) {
+                categoryToUpdate.setSubCategory(BadDb.getInstance().getCategoryList().
+                        stream().
+                        filter(x -> x.getTitle().equals(subCategorySelected.getTitle())).
+                        findFirst()
+                        .get());
+            } else {
+                categoryToUpdate.setSubCategory(null);
+            }
+        }
+
         Stage stage = (Stage) getScene().getWindow();
         stage.close();
     }

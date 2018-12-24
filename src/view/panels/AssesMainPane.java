@@ -18,7 +18,7 @@ public class AssesMainPane extends BorderPane {
         Tab testTab = new Tab("Test", messageBox);
         Tab categoriesTab = new Tab("Category", categoryOverviewPanel);
         Tab questionsTab = new Tab("Questions", questionOverviewPanel);
-        Tab evaluationChange = new Tab("Change evaluation",evaluationChangePanel);
+        Tab evaluationChange = new Tab("Change evaluation", evaluationChangePanel);
 
         tabPane.getTabs().add(testTab);
         tabPane.getTabs().add(categoriesTab);

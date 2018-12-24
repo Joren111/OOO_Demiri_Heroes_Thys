@@ -1,28 +1,26 @@
 package view.panels;
 
-import javafx.geometry.Pos;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import model.Category;
-import db.BadDb;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Question;
+import model.Category;
+import model.db.BadDb;
 
 public class CategoryOverviewPane extends GridPane {
     private TableView<Category> table;
-    private Button btnNew,btnEdit,btnError;
+    private Button btnNew, btnEdit, btnError;
 
     public CategoryOverviewPane() throws Exception {
         this.setPadding(new Insets(5, 5, 5, 5));
@@ -72,19 +70,19 @@ public class CategoryOverviewPane extends GridPane {
         btnEdit.setOnAction(editAction);
     }
 
-    public void handleEditAction(ActionEvent event){
+    public void handleEditAction(ActionEvent event) {
         GridPane editLayout = null;
         Object o = table.getSelectionModel().getSelectedItem();
-        if(o != null){
-            if(o instanceof Category){
+        if (o != null) {
+            if (o instanceof Category) {
                 Category category = (Category) o;
-                editLayout = new CategoryDetailPane(category.getTitle(),category.getDescription());
-                Scene newEditScene = new Scene(editLayout,310,155);
+                editLayout = new CategoryDetailPane(category);
+                Scene newEditScene = new Scene(editLayout, 310, 155);
                 Stage newEditWindow = new Stage();
                 newEditWindow.setScene(newEditScene);
                 newEditWindow.show();
             }
-        }else{
+        } else {
             Stage dialogStage = new Stage();
             dialogStage.initModality(Modality.WINDOW_MODAL);
 
@@ -100,9 +98,11 @@ public class CategoryOverviewPane extends GridPane {
         }
     }
 
-    public void setErrorOkAction(EventHandler<ActionEvent> errorOkAction) { btnError.setOnAction(errorOkAction);}
+    public void setErrorOkAction(EventHandler<ActionEvent> errorOkAction) {
+        btnError.setOnAction(errorOkAction);
+    }
 
-    public void handleErrorButtonAction(ActionEvent event){
+    public void handleErrorButtonAction(ActionEvent event) {
         Stage stage = (Stage) btnError.getScene().getWindow();
         stage.close();
     }

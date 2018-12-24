@@ -1,4 +1,0 @@
-Welk patroon definieert een familie van algoritmes. Kapselt ze in en maakt ze verwisselbaar?,Design patterns,Feedback1,A,B,C,D
-Welk ontwerp principe is het minst van toepassing op het Strategy patroon?,Design principles,Feedback2,A,B,C,D
-Vraag 3?,Java,Feedback3,A,B,C,D
-Vraag 4?,UML,Feedback4,A,B,C,D
